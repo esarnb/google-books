@@ -10,6 +10,7 @@ router.route("/:id")
   .delete(booksController.remove)
   .get(booksController.findById)
 
+// Matches with "/api/books/google/{searchQuery}"
 router.route("/google/:search")
   .get(booksController.search)
 

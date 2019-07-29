@@ -1,9 +1,10 @@
 import axios from 'axios';
 export default {
     findBooks: function (search) {
+        console.log("i love cookies", search)
         return axios.get(`/api/books/google/${search}`) // get all book by search term from google
     },
-    getSavedBooks: function () {
+    getSavedBooks: function (id) {
         return axios.get('/api/books/') // all saved books from db
     },
     saveBook: function (bookData) {

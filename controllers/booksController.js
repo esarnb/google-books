@@ -25,6 +25,10 @@ module.exports = {
   search: function(req, res) {
     console.log("hit")
     axios.get(BASEURL + req.params.search)
-    .then(response => {res.json(response.data.items)})
+    .then(response => {
+      console.log(response);
+      res.json(response.data.items)
+      
+    })
   }
 }

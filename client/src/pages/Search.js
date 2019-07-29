@@ -4,7 +4,6 @@ import Container from '../components/Container';
 import Input from '../components/Input';
 import FormBtn from '../components/FormBtn';
 import Records from '../components/Records';
-import Button from 'antd/es/button';
 
 
 class Search extends Component {
@@ -40,7 +39,8 @@ class Search extends Component {
         this.setState({
             btnTxt: "Searching..."
         })
-    console.log("i love donuts")
+        console.log("i love donuts", this.state.search)
+    
         API.findBooks(this.state.search).then(res => this.setState({
             books: res.data,
             btnTxt: "Search"
@@ -70,9 +70,6 @@ class Search extends Component {
                     this.state.books.map((book, i)=>(
                         <React.Fragment>
                             <Records key={i} book={book.volumeInfo}></Records>
-                            <Button data-bookID="" type="View"/>   
-                            <Button data-bookID="" type="Save"/>   
-                            <Button data-bookID="" type="Delete"/>   
                         </React.Fragment>
                     ))
                 : <h3>No Saved Books</h3>}
