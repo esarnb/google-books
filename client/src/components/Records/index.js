@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'antd/es/button';
 import "./style.css";
 
-function Results(props) {
+function Records(props) {
 
     const {title, authors, description, imageLinks, infoLink, id} = props.book;
     // console.log(props.book);
@@ -28,4 +28,4 @@ function Results(props) {
     )
 }
 
-export default Results
+export default Records

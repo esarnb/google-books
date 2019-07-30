@@ -5,6 +5,9 @@ import Input from '../components/Input';
 import FormBtn from '../components/FormBtn';
 import Records from '../components/Records';
 
+// import Button from 'antd/es/button';
+// import { blue } from '@ant-design/colors';
+// <Button type="secondary" className="blueGold" style={{color: blue[4]}}>View Saved Books</Button>
 
 class Search extends Component {
     state = {
@@ -27,10 +30,8 @@ class Search extends Component {
             console.log("BOOK DATA", bookData.book);
             API.saveBook(saveProps).then(res => {
                 console.log("SAVED BOOK RES: ", res);
-
-                this.setState({
-                    btnSaved: 'Saved!'
-                });
+                console.log("SATE BOOK: ", this.state.books);
+                this.setState({books: this.state.books.filter(x => x.volumeInfo.infoLink !== res.data.link)})
             })
         }
     }

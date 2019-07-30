@@ -4,9 +4,9 @@ const BASEURL = "https://www.googleapis.com/books/v1/volumes?q="
 
 
 module.exports = {
-  findById: function(req, res) {
+  findAll: function(req, res) {
     db.Book
-      .findById(req.params.id)
+      .find({})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
