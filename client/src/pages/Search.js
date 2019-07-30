@@ -10,21 +10,29 @@ class Search extends Component {
     state = {
         search: '',
         books: [],
-        title: '',
-        image: '',
-        author: '',
-        description: '',
         btnTxt: "Search"
     }
 
-    componentDidMount() {
-        // this.loadBooks();
-    }
+    saveBook = (bookData) => {
+        if (bookData.book) {
+            let saveProps = {
+                title: bookData.book.title,
+                authors: bookData.book.authors,
+                image: bookData.book.imageLinks.smallThumbnail,
+                description: bookData.book.description,
+                link: bookData.book.infoLink,
+            }
+            
+            
+            console.log("BOOK DATA", bookData.book);
+            API.saveBook(saveProps).then(res => {
+                console.log("SAVED BOOK RES: ", res);
 
-    loadBooks = search => {
-        API.findBooks(search).then(res => 
-            this.setState({ books: res.data, title: "", author: "", image: '', description: "" })
-        ).catch(err => console.log(err))
+                this.setState({
+                    btnSaved: 'Saved!'
+                });
+            })
+        }
     }
 
     handleInputChange = event => {
@@ -39,8 +47,7 @@ class Search extends Component {
         this.setState({
             btnTxt: "Searching..."
         })
-        console.log("i love donuts", this.state.search)
-    
+
         API.findBooks(this.state.search).then(res => this.setState({
             books: res.data,
             btnTxt: "Search"
@@ -49,7 +56,6 @@ class Search extends Component {
     }
 
     render() {
-        console.log(this.state.books)
         return (
             <Container>
                 <form>
@@ -59,17 +65,16 @@ class Search extends Component {
                         name='search'
                         placeholder="Enter a book title"
                     />
-                    <FormBtn
-                        onClick={this.handleFormSubmit}
-                    >
+
+                    <FormBtn onClick={this.handleFormSubmit}>
                         {this.state.btnTxt}
                     </FormBtn>
                 </form>
 
                 {(this.state.books.length)? 
                     this.state.books.map((book, i)=>(
-                        <React.Fragment>
-                            <Records key={i} book={book.volumeInfo}></Records>
+                        <React.Fragment key={`Fragment-${i}`}>
+                            <Records key={`Record-${i}`} book={book.volumeInfo} saveBook={this.saveBook} ></Records>
                         </React.Fragment>
                     ))
                 : <h3>No Saved Books</h3>}

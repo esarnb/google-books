@@ -4,20 +4,19 @@ import "./style.css";
 
 function Results(props) {
 
-    const {title, authors, description, imageLinks, infoLink} = props.book;
-    console.log(props.book);
+    const {title, authors, description, imageLinks, infoLink, id} = props.book;
+    // console.log(props.book);
     
     return(
-        <span  className="floatLeft paddingLeft">
-            <div>
+        <span>
+            <div className="floatLeft">
                 <img src={imageLinks.smallThumbnail} alt={title}/>
                 <br/>
-                <button className ='btn view' ><a href={infoLink} rel="noopener noreferrer">View</a></button>
-                <button className ='btn save' data-obj={props}>Save</button>
             </div>
-                <Button data-bookID={props.bookID} type="View"/>   
-                <Button data-bookID={props.bookID} type="Save"/>   
-                <Button data-bookID={props.bookID} type="Delete"/>   
+                <Button key="ViewBtnComponent" data-bookid={id} className="btn View" type="primary"><a href={infoLink} target="_blank" rel="noopener noreferrer">View</a></Button>   
+                <Button key="SaveBtnComponent" data-bookid={id} className="btn Save" type="primary" onClick={() => props.saveBook({...props})}>Save</Button>
+                   
+                {/* <Button data-bookID={id} type="Delete"/>    */}
             <div>
                 <p>Title: {title ? title : "N/A"}</p>
                 <p>Authors: {authors ? authors.join(", ") : "N/A"}</p>
