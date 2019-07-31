@@ -1,3 +1,30 @@
+
+![Google Books Demo](/client/public/img/gb.gif)
+
+Google Books is an easy to use React application where you can search for a book title, and save certain search results.
+
+Try out the app: [https://google-books-search-sr.herokuapp.com/](https://google-books-search-sr.herokuapp.com/)
+
+## Prerequisites:
+
+* You must download the entire repo for the application to work correctly.
+
+* You must have [NodeJS](https://nodejs.org/en/) installed on your machine.
+
+## Installation
+
+* Run `npm install` in the root directory to install dependencies that are saved in the package.json file.
+
+
+## Deployment
+
+* Running `npm start` in the root directory will execute the react app and bind the application to localhost of the machine.
+To view the application, you may visit http://localhost:3000/ (if on your personal machine) or your ip/domain address (if hosted on a server, http://ip-or-domain:3000 )
+
+----
+
+## React in Detail
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +93,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Author:
+
+* Esar Behlum
