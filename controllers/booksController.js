@@ -10,13 +10,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   create: function(req, res) {
-    console.log("RESPONSE FROM SERVER SAVE: ", req.body);
-    
     db.Book.create(req.body).then(dbModel => {
       res.json(dbModel)
     }).catch(err => res.status(422).json(err))
   }, 
+
   remove: function(req, res) {
     db.Book.findById({_id: req.params.id})
     .then(dbModel => dbModel.remove())
@@ -24,6 +24,7 @@ module.exports = {
       res.json(result)
     }).catch(err => res.status(422).json(err))
   },
+
   search: function(req, res) {
     console.log("hit")
     axios.get(BASEURL + req.params.search)

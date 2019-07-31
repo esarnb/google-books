@@ -5,10 +5,6 @@ import Input from '../components/Input';
 import FormBtn from '../components/FormBtn';
 import Records from '../components/Records';
 
-// import Button from 'antd/es/button';
-// import { blue } from '@ant-design/colors';
-// <Button type="secondary" className="blueGold" style={{color: blue[4]}}>View Saved Books</Button>
-
 class Search extends Component {
     state = {
         search: '',
@@ -25,13 +21,9 @@ class Search extends Component {
                 description: bookData.book.description,
                 link: bookData.book.infoLink,
             }
-            
-            
-            console.log("BOOK DATA", bookData.book);
+
             API.saveBook(saveProps).then(res => {
-                console.log("SAVED BOOK RES: ", res);
-                console.log("SATE BOOK: ", this.state.books);
-                this.setState({books: this.state.books.filter(x => x.volumeInfo.infoLink !== res.data.link)})
+                this.setState({ books: this.state.books.filter(x => x.volumeInfo.infoLink !== res.data.link) })
             })
         }
     }
@@ -45,15 +37,20 @@ class Search extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        //While searching for books, change btn to searching
         this.setState({
             btnTxt: "Searching..."
         })
 
-        API.findBooks(this.state.search).then(res => this.setState({
-            books: res.data,
-            btnTxt: "Search"
-        }))
-        .catch(err => console.log(err)) 
+        //Filter out all saved books from the search query
+        API.findBooks(this.state.search).then(res1 => {
+            console.log("RES 1", res1)
+
+            API.getSavedBooks().then(async (res2) => {
+                let newState = await res1.data.filter(x => !(res2.data.map(y => y.link).includes(x.volumeInfo.infoLink)));
+                this.setState({ books: newState })
+            })
+        }).catch(err => console.log(err))
     }
 
     render() {
@@ -72,13 +69,13 @@ class Search extends Component {
                     </FormBtn>
                 </form>
 
-                {(this.state.books.length)? 
-                    this.state.books.map((book, i)=>(
+                {(this.state.books.length) ?
+                    this.state.books.map((book, i) => (
                         <React.Fragment key={`Fragment-${i}`}>
                             <Records key={`Record-${i}`} book={book.volumeInfo} saveBook={this.saveBook} ></Records>
                         </React.Fragment>
                     ))
-                : <h3>No Saved Books</h3>}
+                    : <h3>No Saved Books</h3>}
             </Container>
         )
     }
