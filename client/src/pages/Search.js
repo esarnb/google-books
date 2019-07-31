@@ -75,7 +75,7 @@ class Search extends Component {
                             <Records key={`Record-${i}`} book={book.volumeInfo} saveBook={this.saveBook} ></Records>
                         </React.Fragment>
                     ))
-                    : <h3>No Saved Books</h3>}
+                    : <h3>No books available (Check spelling or saved tab!)</h3>}
             </Container>
         )
     }
